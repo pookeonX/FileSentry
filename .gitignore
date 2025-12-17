@@ -1,0 +1,10 @@
+# build artifacts
+*.o
+*.bpf.o
+file_monitor
+
+# runtime logs
+file_events.csv
+
+# editor config
+.vscode/
