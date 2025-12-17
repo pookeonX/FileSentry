@@ -44,31 +44,37 @@ operations, and produces **actionable alerts and audit logs** with minimal overh
 
 ## Syscalls Tracked
 
-- Syscall	    Event Type  	Severity
-- openat	    READ	        INFO
-- openat	    WRITE	        WARN
-- unlinkat	    DELETE	        ALERT
-- renameat2	    RENAME	        ALERT
+| Syscall    | Event Type | Severity |
+|------------|------------|----------|
+| openat     | READ       | INFO     |
+| openat     | WRITE      | WARN     |
+| unlinkat   | DELETE     | ALERT    |
+| renameat2  | RENAME     | ALERT    |
+
 
 ---
 
 ## Run
-# Build eBPF object
+### Build eBPF object
 - clang -g -O2 -target bpf -D__TARGET_ARCH_x86 \-I. -I/usr/include/bpf -I/usr/include/x86_64-linux-gnu \-c file_monitor.bpf.c -o file_monitor.bpf.o
 
-# Build user-space binary
+### Build user-space binary
 - clang -g -O2 file_monitor.c -lbpf -o file_monitor
 
-# Run (requires root)
+### Run (requires root)
 - sudo ./file_monitor /path/to/watch
 
-## Example Output
-# Terminal
-- [WARN]  WRITE  | touch(72893) | secret.txt
-- [ALERT] DELETE | rm(72901)    | secret.txt
+---
 
-# CSV LOG
-- timestamp,pid,process,event,severity,path
-- 2025-12-17 19:30:24,104260,touch,WRITE,WARN,/home/purva-s/Projects/file_guard_libbpf/a.txt
-- 2025-12-17 19:30:27,104298,mv,RENAME,ALERT,/home/purva-s/Projects/file_guard_libbpf/a.txt
-- 2025-12-17 19:30:34,104352,rm,DELETE,ALERT,/home/purva-s/Projects/file_guard_libbpf/b.txt
+## Example Output
+### Terminal
+- ![Architecture Diagram](images/output.png)
+
+
+### CSV Log
+
+| Timestamp           | PID    | Process | Event  | Severity | Path |
+|---------------------|--------|---------|--------|----------|------|
+| 2025-12-17 19:30:24 | 104260 | touch   | WRITE  | WARN     | /home/purva-s/Projects/file_guard_libbpf/a.txt |
+| 2025-12-17 19:30:27 | 104298 | mv      | RENAME | ALERT    | /home/purva-s/Projects/file_guard_libbpf/a.txt |
+| 2025-12-17 19:30:34 | 104352 | rm      | DELETE | ALERT    | /home/purva-s/Projects/file_guard_libbpf/b.txt |
