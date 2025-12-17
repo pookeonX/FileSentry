@@ -1,4 +1,4 @@
-# FileSentry 🔐
+# FileSentry
 ### eBPF-based File Security Monitor for Linux
 
 FileSentry is a lightweight **Linux file security checker** built using **eBPF and libbpf**.
@@ -7,15 +7,15 @@ operations, and produces **actionable alerts and audit logs** with minimal overh
 
 ---
 
-## 🚀 Features
+## Features
 
-- 📂 Monitor a **user-specified directory** and its subpaths
-- 🧠 Classify file operations into security-relevant events
-- 🚨 Severity-based alerts (INFO / WARN / ALERT)
-- 🔕 Noise reduction via kernel-side filtering
-- 🧾 Persistent **CSV audit logging**
-- 🎨 Colorized terminal output for high-severity events
-- 🧩 Clean separation between kernel-space and user-space logic
+- Monitor a **user-specified directory** and its subpaths
+- Classify file operations into security-relevant events
+- Severity-based alerts (INFO / WARN / ALERT)
+- Noise reduction via kernel-side filtering
+- Persistent **CSV audit logging**
+- Colorized terminal output for high-severity events
+- Clean separation between kernel-space and user-space logic
 
 ---
 
