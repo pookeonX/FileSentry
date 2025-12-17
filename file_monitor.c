@@ -61,19 +61,19 @@ static void handle_event(void *ctx, int cpu, void *data, __u32 size)
     time(&now);
     tm = localtime(&now);
     strftime(ts, sizeof(ts), "%Y-%m-%d %H:%M:%S", tm);
-    // if (e->evt_severity == SEV_INFO)
-    //     return;
+    if (e->evt_severity == SEV_INFO)
+        return;
     /* Terminal output (human-facing) */
-    printf(
-        "%s[%s] %-6s | %s(%d) | %s%s\n",
-        severity_color(e->evt_severity),
-        severity_str(e->evt_severity),
-        event_type_str(e->event_type),
-        e->comm,
-        e->pid,
-        e->filename,
-        C_RESET
-    );
+    // printf(
+    //     "%s[%s] %-6s | %s(%d) | %s%s\n",
+    //     severity_color(e->evt_severity),
+    //     severity_str(e->evt_severity),
+    //     event_type_str(e->event_type),
+    //     e->comm,
+    //     e->pid,
+    //     e->filename,
+    //     C_RESET
+    // );
 
     /* CSV logging (audit-facing) */
     f = fopen(CSV_FILE, "a");
